@@ -1,0 +1,32 @@
+.container
+  .card.mt-2
+    .card-header
+      Patients
+
+    .card-body
+      = form_with url: patients_path, method: :get, class: 'row g-2' do |form|
+        .col-auto
+          = text_field_tag :search_term, params[:search_term], class: 'form-control', placeholder: "enter a patient name"
+        .col-auto
+          = form.submit 'Search', class: 'btn btn-primary mb-3'
+
+      - if params[:search_term].present?
+        %h1 Listing patients
+
+        - if @patients.blank?
+          %p No patient was found.
+        - else
+          %table.table
+            %thead
+              %tr
+                %th Name
+                %th Age
+                %th
+
+            %tbody
+              - @patients.each do |patient|
+                %tr
+                  %td= patient.name
+                  %td= patient.age
+                  %td= link_to 'Show', patient
+
