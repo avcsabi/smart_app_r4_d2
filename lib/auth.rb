@@ -14,7 +14,7 @@ module Auth
   def self.create_jwt(fhir_srv_config)
     private_keys_file = ENV['SMART_SYS_APP_PRIVATE_KEYS_FILE'].presence || 'config/auth_private_jwks.json'
     # jwks hold multiple signing keys (private, includes public)
-    jwks = JWT::JWK::Set.new(JSON.load_file(private_keys_file))
+    jwks = JWT::JWK::Set.new(JSON.parse(File.read(private_keys_file)))
     # We use the last/newest jwk to sign our JWT
     # The public part of key is in a separate jwks that is also published at the FHIR server
     # In our case it is published at CernerCentral -> System Accounts
