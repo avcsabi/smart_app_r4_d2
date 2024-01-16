@@ -19,14 +19,27 @@
           %table.table
             %thead
               %tr
+                %th First name
+                %th Last name
                 %th Name
-                %th Age
+                %th Birth date
+                %th Gender
+                %th Phone number
+                %th Communication language
                 %th
 
             %tbody
               - @patients.each do |patient|
                 %tr
-                  %td= patient.name
-                  %td= patient.age
+                  %td= patient.first_name
+                  %td= patient.last_name
+                  %td= link_to patient.name, patient
+                  %td= patient.birth_date&.to_fs(:rfc822)
+                  %td= patient.gender
+                  %td= patient.phone_number
+                  %td= patient.communication_language
                   %td= link_to 'Show', patient
 
+      %br
+
+      .card-link= link_to 'New Patient', new_patient_path

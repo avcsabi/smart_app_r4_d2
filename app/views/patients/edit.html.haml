@@ -1,7 +1,14 @@
-%h1 Editing patient
+.container
+  .card.mt-2
+    .card-header
+      New patient
 
-= render 'form'
+    .card-body
+      %h1 Editing patient
 
-= link_to 'Show', @patient
-\|
-= link_to 'Back', patients_path
+      = render 'form'
+
+      .mt-3
+        = link_to 'Show', @patient
+        \|
+        = link_to 'Back', patients_path

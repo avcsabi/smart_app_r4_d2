@@ -2,14 +2,19 @@ source "https://rubygems.org"
 
 ruby "2.7.2"
 
+gem 'dotenv-rails'
 # Haml is a templating engine for HTML.
 gem "haml-rails", "~> 2.0"
 gem "html2haml"
 gem 'bootstrap', '~> 5.1.3'
 gem 'fhir_client'
+gem 'faraday'
+gem 'jwt'
+gem 'pry'
 
 group :development do
   gem 'rails_layout'
+  gem 'rubocop'
 end
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
@@ -18,8 +23,11 @@ gem "rails", "~> 7.1.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-# Use pg as the database for Active Record
- gem "pg", "~> 1.4", "< 1.5"
+# Use sqlite3 as the database for Active Record
+ gem "sqlite3", "~> 1.4", "< 1.5"
+
+# Use pg on deploy.com
+gem "pg", "~> 1.4", "< 1.5"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"

@@ -1,24 +1,60 @@
-%p#notice= notice
+.container
+  .card.mt-2
+    .card-header
+      Patient details
 
-%p
-  %b Name:
-  = @patient.name
-%p
-  %b First name:
-  = @patient.first_name
-%p
-  %b Last name:
-  = @patient.last_name
-%p
-  %b Age:
-  = @patient.age
-%p
-  %b Gender:
-  = @patient.gender
-%p
-  %b Height:
-  = @patient.height
+    .card-body
+      %p#notice= notice
 
-= link_to 'Edit', edit_patient_path(@patient)
-\|
-= link_to 'Back', patients_path
+      %h1= @patient.name
+      %p
+        %b First name:
+        = @patient.first_name
+      %p
+        %b Last name:
+        = @patient.last_name
+      %p
+        %b Birth date:
+        = @patient.birth_date&.to_fs(:rfc822)
+      %p
+        %b Gender:
+        = @patient.gender
+      %p
+        %b Phone number:
+        = @patient.phone_number
+      %p
+        %b Communication language:
+        = @patient.communication_language
+      %p
+        %b Encounters:
+        - if @patient.details[:encounters].blank?
+          Patient has no encounters
+        - else
+          %table.table
+            %thead
+              %tr
+                %th Date, time
+                %th Type
+                %th Service Type
+                %th Priority
+                %th Status
+                %th Reason
+                %th Location
+                %th Service Provider
+            %tbody
+              - @patient.details[:encounters].each do |encounter|
+                - encounter = encounter[:summary]
+                %tr
+                  %td= encounter[:period_start]&.to_fs(:rfc822)
+                  %td= encounter[:type]
+                  %td= encounter[:service_type]
+                  %td= encounter[:priority]
+                  %td= encounter[:status]
+                  %td= encounter[:reason_code]
+                  %td= encounter[:location]
+                  %td= encounter[:service_provider]
+
+
+      -# Edit is disabled = link_to 'Edit', edit_patient_path(@patient)
+      -# \|
+      = link_to 'Back', 'javascript:history.back()'

@@ -1,5 +1,12 @@
-%h1 New patient
+.container
+  .card.mt-2
+    .card-header
+      New patient
 
-= render 'form'
+    .card-body
+      %h1 New patient
 
-= link_to 'Back', patients_path
+      = render 'form'
+
+      .mt-3
+        = link_to 'Back', patients_path

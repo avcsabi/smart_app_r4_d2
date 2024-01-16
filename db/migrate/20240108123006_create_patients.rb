@@ -4,9 +4,10 @@ class CreatePatients < ActiveRecord::Migration[7.1]
       t.string :name
       t.string :first_name
       t.string :last_name
-      t.integer :age
+      t.date :birth_date
       t.string :gender
-      t.string :height
+      t.string :phone_number
+      t.string :communication_language
 
       t.timestamps
     end
